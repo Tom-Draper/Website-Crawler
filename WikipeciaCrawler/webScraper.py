@@ -1,3 +1,8 @@
+# webScraper.py - requests a wikipeia webpage url and extracts links to other
+# wikipedia pages.
+# Narrows down list to links found inside content text and returns a random url
+# from that list 
+
 from random import randint
 import requests
 from bs4 import BeautifulSoup
@@ -5,7 +10,9 @@ import re
 
 class WebScraper:
     
+    # Requests a url and returns the webpage html as text
     def requestWebpage(self, url):
+        # Remove 'https://en.wikipedia.org' from url and display
         print('Requesting ' + url[30:] + '...')
         
         res = requests.get(url)
@@ -16,6 +23,9 @@ class WebScraper:
             print('There was a problem: %s' % (ex))
         return res.text
     
+    # Gets url webpage html and extracts all links to a list
+    # Narrows down list to links found inside main text
+    # Formats and returns a random link
     def scrapeLinks(self, url):
         html = self.requestWebpage(url)
         soup = BeautifulSoup(html, 'html.parser')
@@ -32,9 +42,9 @@ class WebScraper:
             
         # Select random link from the list
         rand = randint(0, len(links) - 1)
-        link = links[rand]
+        newLink = links[rand]
         
         # Ensure link is a full url
-        if link[0] == '/':
-            link = 'https://en.wikipedia.org' + link
-        return link
+        if newLink[0] == '/':
+            newLink = 'https://en.wikipedia.org' + newLink
+        return newLink

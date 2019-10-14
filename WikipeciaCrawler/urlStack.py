@@ -1,7 +1,11 @@
+# urlStack.py - stack data strcutre designed to store visited urls.
+# Once stack becomes full, top of stack section is sliced off and moved to
+# bottom and stack continues.
+
 class UrlStack:
     
     def __init__(self):
-        self._maxSize = 1000
+        self._maxSize = 100
         self._stack = [None] * self._maxSize
         self._topOfStack = 0
         
@@ -10,11 +14,11 @@ class UrlStack:
             
     def push(self, url):
         # If reach the top of the stack
-        if self._topOfStack == self._maxSize - 1:
-            # Copy top ten urls to bottom of stack
-            self.stack[0:11] = self._stack[self._maxSize - 11:self._maxSize]
-            # Move topOfStack to point above those ten
-            self._topOfStack == 11
+        if self._topOfStack == self._maxSize:
+            # Copy top nine urls to bottom of stack
+            self._stack[0:10] = self._stack[self._maxSize - 10:self._maxSize]
+            # Move topOfStack to point above those nine
+            self._topOfStack = 10
             # Add next url
             self._stack[self._topOfStack] = url
         else:
