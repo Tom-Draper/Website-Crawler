@@ -7,4 +7,4 @@ The program initally uses the request module to request and retrieve the html fo
 
 ### How to Use
 
-Run wikiCrawler.py
+Run wikiCrawler.py to start the program.
